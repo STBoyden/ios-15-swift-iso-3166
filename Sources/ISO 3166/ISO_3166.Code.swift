@@ -74,7 +74,7 @@ extension ISO_3166.Code {
 
         switch normalized.count {
         case 2:
-            do {
+            do throws(ISO_3166.Alpha2.Error) {
                 let alpha2 = try ISO_3166.Alpha2(normalized)
                 self = .alpha2(alpha2)
             } catch {
@@ -88,7 +88,7 @@ extension ISO_3166.Code {
         case 3:
             // Try alpha-3 first (letters)
             if normalized.allSatisfy({ $0.ascii.isLetter }) {
-                do {
+                do throws(ISO_3166.Alpha3.Error) {
                     let alpha3 = try ISO_3166.Alpha3(normalized)
                     self = .alpha3(alpha3)
                 } catch {
@@ -101,7 +101,7 @@ extension ISO_3166.Code {
             }
             // Try numeric (digits)
             else if normalized.allSatisfy({ $0.ascii.isDigit }) {
-                do {
+                do throws(ISO_3166.Numeric.Error) {
                     let numeric = try ISO_3166.Numeric(normalized)
                     self = .numeric(numeric)
                 } catch {
