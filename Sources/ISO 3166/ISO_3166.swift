@@ -3,8 +3,6 @@
 //
 // Country code representation per ISO 3166-1
 
-import Standard_Library_Extensions
-
 /// Namespace for ISO 3166 country code types
 ///
 /// ISO 3166-1 defines three types of country codes:

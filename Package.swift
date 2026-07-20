@@ -1,8 +1,6 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.0
 
 import PackageDescription
-
-
 
 extension String {
     static let iso3166: Self = "ISO 3166"
@@ -10,34 +8,17 @@ extension String {
 
 extension String { var tests: Self { self + " Tests" } }
 
-extension Target.Dependency {
-    static var iso3166: Self { .target(name: .iso3166) }
-    static var standards: Self { .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions") }
-    static var incits_4_1986: Self { .product(name: "ASCII Primitives", package: "swift-ascii-primitives") }
-}
-
 let package = Package(
     name: "swift-iso-3166",
     platforms: [
-        .macOS(.v26),
-        .iOS(.v26),
-        .tvOS(.v26),
-        .watchOS(.v26)
+        .iOS(.v15),
     ],
     products: [
         .library(name: "ISO 3166", targets: ["ISO 3166"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/swift-primitives/swift-standard-library-extensions.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-ascii-primitives.git", branch: "main")
-    ],
     targets: [
         .target(
             name: "ISO 3166",
-            dependencies: [
-                .standards,
-                .incits_4_1986
-            ],
             exclude: [
                 "Resources"
             ]
@@ -45,25 +26,9 @@ let package = Package(
         .testTarget(
             name: "ISO 3166 Tests",
             dependencies: [
-                "ISO 3166",
+                "ISO 3166"
             ]
         ),
     ],
     swiftLanguageModes: [.v6]
 )
-
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableExperimentalFeature("Lifetimes"),
-        .enableExperimentalFeature("SuppressedAssociatedTypes"),
-    ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
-}

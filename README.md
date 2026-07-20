@@ -1,3 +1,9 @@
+> [!NOTE]
+> This is a fork for my internal use to backport it to iOS 15. Always prefer the
+> [original repository](https://github.com/swift-iso/swift-iso-3166).
+
+---
+
 # swift-iso-3166
 
 Type-safe Swift implementation of ISO 3166-1 country codes.
@@ -155,6 +161,7 @@ print(lookupCountry("jp")!)  // "jp = jpn = 392"
 ### Refined Type Pattern
 
 This implementation follows the refined type pattern:
+
 - **String-based storage**: Codes stored as validated strings
 - **Type-safe conversions**: Compiler-enforced valid transformations
 - **Single source of truth**: Generated from authoritative UN data
@@ -169,6 +176,7 @@ This implementation follows the refined type pattern:
 ### Code Generation
 
 All 249 country codes are generated from JSON data files:
+
 - `Resources/iso-3166-1.json`: Authoritative UN Statistics Division data
 - `Scripts/generate-country-codes.swift`: Code generator
 - `Generated/*.swift`: Auto-generated files (do not edit directly)
@@ -186,12 +194,11 @@ Country codes are sourced from the United Nations Statistics Division, which mai
 ## Requirements
 
 - Swift 6.0+
-- macOS 15+, iOS 18+, tvOS 18+, watchOS 11+
+- macOS 15+, iOS 15+, tvOS 18+, watchOS 11+
 
 ## Dependencies
 
-- [swift-standards](https://github.com/swift-standards/swift-standards): Common standards utilities
-- [swift-incits-4-1986](https://github.com/swift-incits/swift-incits-4-1986): ASCII character classification
+This package has no external dependencies.
 
 ## License
 

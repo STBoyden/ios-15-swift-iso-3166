@@ -3,9 +3,6 @@
 //
 // Country/region code representation (all formats)
 
-import ASCII_Primitives
-import Standard_Library_Extensions
-
 extension ISO_3166 {
     /// Country/region code per ISO 3166-1 (all formats)
     ///
@@ -87,7 +84,7 @@ extension ISO_3166.Code {
 
         case 3:
             // Try alpha-3 first (letters)
-            if normalized.allSatisfy({ $0.ascii.isLetter }) {
+            if normalized.isASCIIAlphabetic {
                 do throws(ISO_3166.Alpha3.Error) {
                     let alpha3 = try ISO_3166.Alpha3(normalized)
                     self = .alpha3(alpha3)
@@ -100,7 +97,7 @@ extension ISO_3166.Code {
                 }
             }
             // Try numeric (digits)
-            else if normalized.allSatisfy({ $0.ascii.isDigit }) {
+            else if normalized.isASCIINumeric {
                 do throws(ISO_3166.Numeric.Error) {
                     let numeric = try ISO_3166.Numeric(normalized)
                     self = .numeric(numeric)

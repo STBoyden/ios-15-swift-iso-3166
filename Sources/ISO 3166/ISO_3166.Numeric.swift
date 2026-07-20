@@ -3,9 +3,6 @@
 //
 // Numeric country code (ISO 3166-1 numeric)
 
-import ASCII_Primitives
-import Standard_Library_Extensions
-
 extension ISO_3166 {
     /// Numeric country code per ISO 3166-1 numeric
     ///
@@ -43,7 +40,7 @@ extension ISO_3166 {
             }
 
             // Validate ASCII digits only
-            guard normalized.allSatisfy({ $0.ascii.isDigit }) else {
+            guard normalized.isASCIINumeric else {
                 throw Numeric.Error.invalidCharacters(normalized)
             }
 

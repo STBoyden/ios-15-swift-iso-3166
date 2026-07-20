@@ -49,8 +49,6 @@ func generateCountryCodes(countries: [Country]) -> String {
     // Generated from JSON data files using Scripts/generate-country-codes.swift
     // To update: modify JSON files in Resources/ then run: swift Scripts/generate-country-codes.swift
 
-    import Standards
-
     extension ISO_3166 {
         /// Mapping from ISO 3166-1 alpha-2 (2-letter) to alpha-3 (3-letter) codes
         ///
@@ -192,10 +190,9 @@ func generateAlpha2CaseIterable(countries: [Country]) -> String {
     """
 
     let sortedCountries = countries.sorted(by: { $0.alpha2 < $1.alpha2 })
-    for (index, country) in sortedCountries.enumerated() {
+    for country in sortedCountries {
         let codeEscaped = escapeIfNeeded(country.alpha2.lowercased())
-        let comma = index < sortedCountries.count - 1 ? "," : ""
-        output += "        .\(codeEscaped)\(comma)\n"
+        output += "        .\(codeEscaped),\n"
     }
 
     output += """
@@ -223,10 +220,9 @@ func generateAlpha3CaseIterable(countries: [Country]) -> String {
     """
 
     let sortedCountries = countries.sorted(by: { $0.alpha3 < $1.alpha3 })
-    for (index, country) in sortedCountries.enumerated() {
+    for country in sortedCountries {
         let codeEscaped = escapeIfNeeded(country.alpha3.lowercased())
-        let comma = index < sortedCountries.count - 1 ? "," : ""
-        output += "        .\(codeEscaped)\(comma)\n"
+        output += "        .\(codeEscaped),\n"
     }
 
     output += """
@@ -254,9 +250,8 @@ func generateNumericCaseIterable(countries: [Country]) -> String {
     """
 
     let sortedCountries = countries.sorted(by: { $0.numeric < $1.numeric })
-    for (index, country) in sortedCountries.enumerated() {
-        let comma = index < sortedCountries.count - 1 ? "," : ""
-        output += "        .`\(country.numeric)`\(comma)\n"
+    for country in sortedCountries {
+        output += "        .`\(country.numeric)`,\n"
     }
 
     output += """

@@ -3,8 +3,6 @@
 //
 // Error types for ISO 3166 validation
 
-import Standard_Library_Extensions
-
 extension ISO_3166 {
     /// Errors that can occur when working with country codes
     public enum Error: Swift.Error, Sendable, Equatable {

@@ -51,6 +51,10 @@ struct ISO3166Tests {
         #expect(throws: ISO_3166.Alpha2.Error.invalidCharacters("u ")) {
             try ISO_3166.Alpha2("u ")
         }
+
+        #expect(throws: ISO_3166.Alpha2.Error.invalidCharacters("éx")) {
+            try ISO_3166.Alpha2("éx")
+        }
     }
 
     @Test
@@ -146,6 +150,10 @@ struct ISO3166Tests {
         #expect(throws: ISO_3166.Alpha3.Error.invalidCharacters("us ")) {
             try ISO_3166.Alpha3("us ")
         }
+
+        #expect(throws: ISO_3166.Alpha3.Error.invalidCharacters("éxx")) {
+            try ISO_3166.Alpha3("éxx")
+        }
     }
 
     @Test
@@ -240,6 +248,10 @@ struct ISO3166Tests {
 
         #expect(throws: ISO_3166.Numeric.Error.invalidCharacters("84 ")) {
             try ISO_3166.Numeric("84 ")
+        }
+
+        #expect(throws: ISO_3166.Numeric.Error.invalidCharacters("١٢٣")) {
+            try ISO_3166.Numeric("١٢٣")
         }
     }
 

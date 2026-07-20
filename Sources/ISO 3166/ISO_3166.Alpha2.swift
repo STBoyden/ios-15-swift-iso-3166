@@ -3,9 +3,6 @@
 //
 // Two-letter country code (ISO 3166-1 alpha-2)
 
-import ASCII_Primitives
-import Standard_Library_Extensions
-
 extension ISO_3166 {
     /// Two-letter country code per ISO 3166-1 alpha-2
     ///
@@ -43,7 +40,7 @@ extension ISO_3166 {
             }
 
             // Validate ASCII letters only
-            guard normalized.allSatisfy({ $0.ascii.isLetter }) else {
+            guard normalized.isASCIIAlphabetic else {
                 throw Alpha2.Error.invalidCharacters(normalized)
             }
 
