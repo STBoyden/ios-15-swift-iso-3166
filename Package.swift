@@ -9,7 +9,7 @@ extension String {
 extension String { var tests: Self { self + " Tests" } }
 
 let package = Package(
-    name: "swift-iso-3166",
+    name: "ios-15-swift-iso-3166",
     platforms: [
         .iOS(.v15),
     ],
